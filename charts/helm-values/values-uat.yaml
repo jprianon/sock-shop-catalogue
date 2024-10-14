@@ -1,4 +1,4 @@
-namespace: "uat"
+namespace: "uatljjl"
 catalogue:
     image:
         repo: weaveworksdemos/catalogue
