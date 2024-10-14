@@ -1,16 +1,8 @@
-FROM weaveworksdemos/carts:0.4.8
+FROM weaveworksdemos/catalogue:0.3.5
 
-#Version 1
+WORKDIR /
+COPY --chown=myuser:mygroup images/ /images/
+# RUN   sudo chown -R myuser:mygroup  /images
 
-# Set hostname
-ENV HOSTNAME=carts
-
-# Security settings
-USER nobody:nogroup
-#RUN sudo chmod 755 /usr/src/app
-
-# Environment variables
-ENV JAVA_OPTS="-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false"
-
-# Container settings
-CMD ["java", "-jar", "carts.jar"]
+CMD ["/app", "-port=80"]
+EXPOSE 80
