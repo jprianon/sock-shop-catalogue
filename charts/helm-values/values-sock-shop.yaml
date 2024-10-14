@@ -1,4 +1,4 @@
-namespace: "prod"
+namespace: "sock-shop"
 catalogue:
     image:
         repo: weaveworksdemos/catalogue
