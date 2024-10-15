@@ -3,19 +3,22 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo Entered the install phase...
+      - echo Entered the install phase....
       #- export AWS_ACCESS_KEY_ID=$ACCESS_KEY_ID
       #- export AWS_SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY
       #- export AWS_DEFAULT_REGION=$REGION
       #- export AWS_DEFAULT_OUTPUT="json"
+      - export ENVIRONMENT=sock-shop
       - chmod +x ./scripts/setup_k8s_tools.sh
       - ./scripts/setup_k8s_tools.sh
 
   pre_build:
     commands:
+      - echo $ENVIRONMENT
       - echo "Install completed on" `date`
       - echo "Connecting to EKS cluster:" $CLUSTER_NAME
       - aws eks update-kubeconfig --region $REGION --name $CLUSTER_NAME
+      - echo ${ENVIRONMENT}
       - echo "Checking if Kubernetes namespace exists (${ENVIRONMENT})"
       - |
         if kubectl get namespaces | grep $ENVIRONMENT; then
@@ -31,7 +34,8 @@ phases:
       - echo Deployment started on $(date)
       - helm list -n $ENVIRONMENT
       - echo Upgrading the Helm chart...
-      - helm upgrade --install catalogue charts/helm-values --values charts/helm-values/values-${ENVIRONMENT}.yaml -n $ENVIRONMENT
+      #- #helm upgrade sock-shop charts/helm-values --values charts/helm-values/values-${ENVIRONMENT}.yaml -n $ENVIRONMENT..
+      - helm upgrade --install catalogue charts/helm-values --namespace $ENVIRONMENT --values=charts/helm-values/values-${ENVIRONMENT}.yaml --force
 
   post_build:
     commands:
