@@ -18,14 +18,14 @@ spec:
     metadata:
       labels:
         name: catalogue
-      {{- if .Values.istio.enabled }}
+          {{- if .Values.istio.enabled }}
       annotations:
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
-      {{- end }}
+        {{- end }}
     spec:
       containers:
       - name: catalogue
-        image: {{if .Values.global.registry}}{{ .Values.global.registry }}/{{end}}{{ .Values.catalogue.image.repo }}:{{ .Values.catalogue.image.tag }}
+        image: 715841363614.dkr.ecr.eu-west-1.amazonaws.com/sock-shop-catalogue:latest #{{if .Values.global.registry}}{{ .Values.global.registry }}/{{end}}{{ .Values.catalogue.image.repo }}:{{ .Values.catalogue.image.tag }}
         command: ["/app"]
         args:
         - -port={{ .Values.catalogue.containerPort }}
