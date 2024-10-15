@@ -34,7 +34,8 @@ phases:
       - echo Deployment started on $(date)
       - helm list -n $ENVIRONMENT
       - echo Upgrading the Helm chart...
-      - helm upgrade sock-shop charts/helm-values --values charts/helm-values/values-${ENVIRONMENT}.yaml -n $ENVIRONMENT
+      - #helm upgrade sock-shop charts/helm-values --values charts/helm-values/values-${ENVIRONMENT}.yaml -n $ENVIRONMENT
+      - helm upgrade --install catalogue charts/helm-values --namespace $ENVIRONMENT --values=charts/helm-values/values-${ENVIRONMENT}.yaml --force
 
   post_build:
     commands:
