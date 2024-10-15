@@ -47,5 +47,5 @@ phases:
       #  if [ "$http_status" == "200" ]; then
       #    echo "The request succeeded with HTTP response code 200 (OK)"
       #  else
-      #    echo "The request failed with HTTP response code $http_status"
+      #    echo "The request failed with HTTP response code $http_status"d
       #  fi
