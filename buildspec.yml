@@ -14,7 +14,7 @@ phases:
       - cd catalogue
       - git fetch --depth=2
       - git status
-      - chmod +x script/check_changes.sh
+      - chmod +x scripts/check_changes.sh
 
 
   pre_build:
