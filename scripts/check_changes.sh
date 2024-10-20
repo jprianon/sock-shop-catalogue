@@ -20,17 +20,17 @@ fi
 
 echo "Changements détectés : $changes"
 
-# Si aucune modification n'est trouvée, quitter le script
+# Si aucune modification n'est trouvée, quitter le script avec un code de sortie 1
 if [[ -z "$changes" ]]; then
     echo "Aucune modification détectée. Quitter le build."
-    exit 0 # Code 0 pour indiquer que tout va bien, mais on ne veut pas continuer.
+    exit 1 # Utilisez un code de sortie 1 pour indiquer une erreur
 fi
 
 # Vérifier si les changements sont dans le répertoire spécifique
 if [[ "$changes" == *"$REPO_SPECIFIC_PATH"* ]]; then
     echo "Modifications détectées dans '$REPO_SPECIFIC_PATH'"
     # Appeler le webhook ou d'autres étapes si nécessaire
-    curl -X POST -H "Content-Type: application/json" -d '{"text":"Modifications détectées dans '"$REPO_SPECIFIC_PATH"'"}' https://codebuild.eu-west-1.amazonaws.com/webhooks?t=eyJlbmNyeXB0ZWREYXRhIjoiR0hXMmZTZWNhTDExalVFdmllRU8yN2RWNnBEN0NEWDFxOVlvM1NFUGF5a2YrQysvMHp2RytpalZScHNEWG12OHVZWnBZV09ZRk5MeWQwQkVKM3FxNFRvPSIsIml2UGFyYW1ldGVyU3BlYyI6InpSZkhTTURCWGorM0pHQUwiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&v=1
+    curl -X POST -H "Content-Type: application/json" -d '{"text":"Modifications détectées dans '"$REPO_SPECIFIC_PATH"'"}'  https://codebuild.eu-west-1.amazonaws.com/webhooks?t=eyJlbmNyeXB0ZWREYXRhIjoiR0hXMmZTZWNhTDExalVFdmllRU8yN2RWNnBEN0NEWDFxOVlvM1NFUGF5a2YrQysvMHp2RytpalZScHNEWG12OHVZWnBZV09ZRk5MeWQwQkVKM3FxNFRvPSIsIml2UGFyYW1ldGVyU3BlYyI6InpSZkhTTURCWGorM0pHQUwiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&v=1
 else
     echo "Aucune modification dans le répertoire spécifique '$REPO_SPECIFIC_PATH'"
 fi
