@@ -9,10 +9,11 @@ phases:
       - echo "Vérification des changements dans le répertoire :" $REPO_SPECIFIC_PATH
       #- git clone https://github.com/jprianon/sock-shop-catalogue.git .
       # Vérifie les fichiers modifiés dans la branche
+      - echo "Démarrage du build..."
+      - git clone https://github.com/jprianon/sock-shop-catalogue.git catalogue || echo "Le dépôt existe déjà, utilisation du dépôt cloné."
+      - cd catalogue
+      - git fetch --depth=2
       - git status
-      - git fetch --depth=2  # Récupère l'historique de deux commits pour pouvoir accéder à HEAD~1
-      - git log --oneline 
-      - echo $changes
       - chmod +x ./check_changes.sh
 
 
