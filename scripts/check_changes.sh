@@ -4,10 +4,10 @@
 REPO_SPECIFIC_PATH="catalogue/"
 
 # Vérifier si le répertoire existe
-if [ ! -d "$REPO_SPECIFIC_PATH" ]; then
-    echo "$REPO_SPECIFIC_PATH n'existe pas."
-    exit 1
-fi
+#if [ ! -d "$REPO_SPECIFIC_PATH" ]; then
+#    echo "$REPO_SPECIFIC_PATH n'existe pas."
+#    exit 1
+#fi
 
 # Vérifier les changements
 # Utiliser HEAD~1 seulement si le référentiel a plus d'un commit
