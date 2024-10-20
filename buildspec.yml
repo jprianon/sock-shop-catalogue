@@ -14,8 +14,8 @@ phases:
       - cd catalogue
       - git fetch --depth=2
       - git status
-      - cd ../
       - git rev-parse --verify HEAD~1
+      - cd ../
       - chmod +x scripts/check_changes.sh
 
 
