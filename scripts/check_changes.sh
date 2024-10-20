@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Définir le chemin spécifique au répertoire
-REPO_SPECIFIC_PATH="../catalogue/"
+REPO_SPECIFIC_PATH="catalogue/"
 
 # Vérifier si le répertoire existe
 if [ ! -d "$REPO_SPECIFIC_PATH" ]; then
@@ -12,7 +12,7 @@ fi
 # Vérifier les changements
 # Utiliser HEAD~1 seulement si le référentiel a plus d'un commit
 if git rev-parse --verify HEAD~1 >/dev/null 2>&1; then
-    changes=$(git diff --name-only HEAD~1 HEAD)
+    changes=$(git diff --name-only HEAD~1 HEAD "$REPO_SPECIFIC_PATH")
 else
     echo "Pas assez d'historique pour vérifier les modifications."
     changes=""
