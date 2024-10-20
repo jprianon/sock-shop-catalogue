@@ -10,7 +10,13 @@ if [ ! -d "$REPO_SPECIFIC_PATH" ]; then
 fi
 
 # Vérifier les changements
-changes=$(git diff --name-only HEAD~1 HEAD)
+# Utiliser HEAD~1 seulement si le référentiel a plus d'un commit
+if git rev-parse --verify HEAD~1 >/dev/null 2>&1; then
+    changes=$(git diff --name-only HEAD~1 HEAD)
+else
+    echo "Pas assez d'historique pour vérifier les modifications."
+    changes=""
+fi
 
 echo "Changements détectés : $changes"
 
