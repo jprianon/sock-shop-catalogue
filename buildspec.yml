@@ -15,6 +15,7 @@ phases:
       - git fetch --depth=2
       - git status
       - cd ../
+      - git rev-parse --verify HEAD~1
       - chmod +x scripts/check_changes.sh
 
 
