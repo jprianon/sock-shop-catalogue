@@ -10,14 +10,8 @@ phases:
       # Vérifie les fichiers modifiés dans la branche
       - changes=$(git diff --name-only HEAD~1 HEAD)
       - echo $changes
-      # Si les changements incluent des fichiers du répertoire spécifique, déclencher le webhook
-      - if [[ "$changes" == *"$REPO_SPECIFIC_PATH"* ]]; then
-          curl -X POST -H "Content-Type: application/json" \
-          -d '{"text":"Modifications détectées dans '"$REPO_SPECIFIC_PATH"'"}' \
-          https://your-webhook-url.com/trigger;
-        else
-          echo "Aucune modification dans le répertoire spécifique $REPO_SPECIFIC_PATH";
-        fi
+      - chmod +x ./check_changes.sh
+
 
   pre_build:
     commands:
