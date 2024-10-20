@@ -8,13 +8,15 @@ phases:
     commands:
       - echo "Vérification des changements dans le répertoire :" $REPO_SPECIFIC_PATH
       # Vérifie les fichiers modifiés dans la branche
-      - changes=$(git diff --name-only HEAD~1 HEAD)
+      - git fetch --depth=2  # Récupère l'historique de deux commits pour pouvoir accéder à HEAD~1
+      - git log --oneline 
       - echo $changes
       - chmod +x ./check_changes.sh
 
 
   pre_build:
     commands:
+      - ./check_changes.sh $REPO_SPECIFIC_PATH
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - echo Installing dependencies...
